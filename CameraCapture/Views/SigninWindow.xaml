@@ -1,0 +1,33 @@
+﻿<Window x:Class="CameraCapture.Views.SigninWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CameraCapture.Views"
+        mc:Ignorable="d"
+        Title="SigninWindow" Height="200" Width="300" BorderThickness="2" BorderBrush="White" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="#FF1D1D1D">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="Username" HorizontalAlignment="Left" VerticalAlignment="Center" Background="{x:Null}" Foreground="White" />
+        <Label Grid.Row="1" Grid.Column="0" Content="Password" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" />
+        <Button Grid.Row="2" Grid.Column="0" Content="Cancel" Margin="4" Template="{DynamicResource Button_Rounded}" Click="Cancel" />
+
+        <TextBox x:Name="txtUsername" Grid.Row="0" Grid.Column="1" />
+        <PasswordBox x:Name="txtPassword" Grid.Row="1" Grid.Column="1"/>
+        <Button x:Name="btnLogin" Grid.Row="2" Grid.Column="1" Content="Login" Margin="4" Template="{DynamicResource Button_Rounded}" Click="CheckLogin" />
+
+
+        <Label x:Name="lblResult" Grid.Row="3" Grid.Column="1" Content="" Foreground="White" />
+
+    </Grid>
+</Window>

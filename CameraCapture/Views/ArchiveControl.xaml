@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="CameraCapture.Views.ArchiveControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CameraCapture.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="Filter patient" Margin="0,0,0,10" Foreground="White">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="Patient information" VerticalAlignment="Center" Foreground="White" />
+                    <TextBox x:Name="txtValue" Grid.Column="1" />
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="80"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="From Date" Grid.Column="0" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Right"/>
+                    <DatePicker x:Name="dtFromDate" Grid.Column="1" VerticalAlignment="Center" />
+                    <Label Content="To Date" Grid.Column="2" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Right"/>
+                    <DatePicker x:Name="dtToDate" Grid.Column="3" VerticalAlignment="Center" />
+                    <Button Name="btnFilter" Content="Filter" Grid.Column="4" Template="{DynamicResource Button_Rounded}" Margin="5" Click="AppendFilter" />
+                    <Button Name="btnDetail" Content="Detail" Grid.Column="5" Template="{DynamicResource Button_Rounded}" Margin="5" Click="ShowDetail" />
+                </Grid>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Archive Patient Table"  Grid.Row="2" Margin="0,0,0,10" Foreground="White">
+            <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" Background="{x:Null}" BorderThickness="0" IsReadOnly="True" MouseDoubleClick="OpenDetailWindow">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="2*" Header="Title" Binding="{Binding Title}"/>
+                    <DataGridTextColumn Width="2*" Header="First name" Binding="{Binding FirstName}"/>
+                    <DataGridTextColumn Width="2*" Header="Last name" Binding="{Binding LastName}"/>
+                    <DataGridTextColumn Width="*" Header="Patient ID" Binding="{Binding PatientId}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+    </Grid>
+</UserControl>

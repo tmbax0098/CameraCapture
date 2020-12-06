@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="CameraCapture.Views.GallerySettingControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CameraCapture.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="40" d:DesignWidth="400" Loaded="onLoad">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="100"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Directory Address" VerticalAlignment="Center" Background="{x:Null}" Foreground="White" />
+        <TextBox x:Name="txtAddress" Grid.Column="1" IsReadOnly="True" />
+        <Button Name="btnSave" Content="Browse Gallery" Grid.Column="2" Template="{DynamicResource Button_Rounded}" Margin="2" Click="Save" />
+        
+    </Grid>
+</UserControl>

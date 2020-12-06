@@ -1,0 +1,16 @@
+[2020-11-21 23:29:09.476][INF] The COM:HCCoreBase ver is 1.0.0.1, 2018_06_01. Async:1.
+[2020-11-21 23:29:09.476][INF] The COM:Core ver is 6.0.2.10, 2019_01_17. Async:1.
+[2020-11-21 23:29:09.476][INF] This HCNetSDK ver is 6.0.2.10 Ver 2019_01_17.
+[2020-11-21 23:29:47.288][INF] Login dev 192.168.1.10:8000.
+[2020-11-21 23:29:47.288][DBG] CMemPool::CMemPool, resize[256]
+[2020-11-21 23:29:47.289][DBG] CMemPool::CMemPool, resize[16]
+[2020-11-21 23:29:47.289][DBG] CMemPool::CMemPool, resize[64]
+[2020-11-21 23:29:47.289][DBG] CMemPool::CMemPool, resize[64]
+[2020-11-21 23:29:47.289][DBG] CMemPool::CMemPool, resize[16]
+[2020-11-21 23:29:47.291][INF] LogonDev1 in[192.168.1.10:8000]
+[2020-11-21 23:29:47.295][INF] CCoreGlobalCtrlBase::LoadDSo, load [ssleay32.dll] with sdk path success and get handle[0x10000000]
+[2020-11-21 23:29:47.295][DBG] ssleay32.dll, Real Path[C:\Users\rad\Desktop\CCTV\CCTVManager\CCTVManager\bin\Debug\ssleay32.dll]
+[2020-11-21 23:29:47.295][INF] CCoreGlobalCtrlBase::LoadDSo, load [libeay32.dll] with sdk path success and get handle[0xd7f0000]
+[2020-11-21 23:29:47.295][DBG] libeay32.dll, Real Path[C:\Users\rad\Desktop\CCTV\CCTVManager\CCTVManager\bin\Debug\LIBEAY32.dll]
+[2020-11-21 23:29:47.296][INF] CSSLTrans::SSLCtxInit, dwSSLVersion[0], m_fnClientMethodV23
+[2020-11-21 23:29:48.575][ERR] AnalyzeLoginParams pSecurityInfo->dwDevTime=340745751,struLoginOutInfo.dwCheckTime=340753734, tickTime=7983

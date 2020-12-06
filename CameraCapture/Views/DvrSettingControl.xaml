@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="CameraCapture.Views.DvrSettingControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CameraCapture.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="350" d:DesignWidth="270" Loaded="OnLoad">
+    <Grid  Margin="10,0,0,0" >
+        <Grid.RowDefinitions>
+            <!--<RowDefinition Height="50"/>-->
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!--<Label Content="Dvr setting" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="14" />-->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Device IP"   Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Background="{x:Null}" Foreground="White"/>
+            <Label Content="Device Port" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Background="{x:Null}" Foreground="White"/>
+            <Label Content="Username"    Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Background="{x:Null}" Foreground="White"/>
+            <Label Content="Password"    Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Background="{x:Null}" Foreground="White"/>
+            <Label Content="Channel"    Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Background="{x:Null}" Foreground="White"/>
+
+            <TextBox Name="txtDvrAddress" Grid.Row="0" Grid.Column="1" Height="50" MaxHeight="50" MinHeight="50" VerticalAlignment="Center"/>
+            <TextBox Name="txtDvrPort" Grid.Row="1" Grid.Column="1" Height="50" MaxHeight="50" MinHeight="50" VerticalAlignment="Center"/>
+            <TextBox Name="txtDvrUsername" Grid.Row="2" Grid.Column="1" Height="50" MaxHeight="50" MinHeight="50" VerticalAlignment="Center"/>
+            <TextBox Name="txtDvrPassword" Grid.Row="3" Grid.Column="1" Height="50" MaxHeight="50" MinHeight="50" VerticalAlignment="Center"/>
+            <TextBox Name="txtDvrChannel" Grid.Row="4" Grid.Column="1" Height="50" MaxHeight="50" MinHeight="50" VerticalAlignment="Center"/>
+
+            <Button Name="btnSaveDvrSetting" Content="Save Camera Setting" Grid.Row="5" Grid.Column="1" Margin="2" Template="{DynamicResource Button_Rounded}" Click="Save" />
+        </Grid>
+    </Grid>
+</UserControl>
