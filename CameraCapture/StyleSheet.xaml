@@ -1026,7 +1026,7 @@
         <Setter Property="Background" Value="#E64A19" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="BorderBrush" Value="#FF444444" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="MinWidth" Value="0" />

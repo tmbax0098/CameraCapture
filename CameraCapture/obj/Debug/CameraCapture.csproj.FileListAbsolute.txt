@@ -45,10 +45,10 @@ C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\CameraCapture.ex
 C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\CameraCapture.pdb
 C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\Views\ArchiveDetailWindow.g.cs
 C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\Views\ArchiveDetailWindow.baml
-C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\CameraCapture.csprojAssemblyReference.cache
 C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\Views\CloseWindow.g.cs
 C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\Views\CloseWindow.baml
 C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\Views\SigninWindow.g.cs
 C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\Views\SigninWindow.baml
 C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\Views\MessageControl.g.cs
 C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\Views\MessageControl.baml
+C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\CameraCapture.csprojAssemblyReference.cache

@@ -24,7 +24,7 @@
                         <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
 
-                    <Image x:Name="imageLeft" />
+                    <Image x:Name="imageLeft" Stretch="Fill" />
                     <Button x:Name="btnSetLeft" Content="Set Left" Grid.Row="1" Template="{DynamicResource Button_Rounded}" Margin="5" Click="SetImageToLeft"/>
                 </Grid>
 
@@ -35,7 +35,7 @@
                         <RowDefinition/>
                         <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
-                    <Image x:Name="imageRight" />
+                    <Image x:Name="imageRight" Stretch="Fill" />
                     <Button x:Name="btnSetRight" Content="Set Right" Grid.Row="1" Template="{DynamicResource Button_Rounded}" Margin="5" Click="SetImageToRight" />
                 </Grid>
             </GroupBox>

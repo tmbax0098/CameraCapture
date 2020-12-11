@@ -13,7 +13,7 @@ namespace CameraCapture.Controllers
 
         public DvrObject dvrObject { get; private set; }
 
-        public static string DvrSettingFile = "dvrSetting";
+        public static string DvrSettingFile = "cameraSetting";
 
         private string path = "";
 
@@ -47,10 +47,8 @@ namespace CameraCapture.Controllers
 
         public void write()
         {
-            File.WriteAllLines(path, new string[] { dvrObject.Address, dvrObject.Port, dvrObject.Username, dvrObject.Password });
+            File.WriteAllLines(path, new string[] { dvrObject.Address, dvrObject.Port, dvrObject.Username, dvrObject.Password, dvrObject.Channel });
         }
-
-
 
     }
 }

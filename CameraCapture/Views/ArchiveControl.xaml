@@ -46,7 +46,7 @@
             </Grid>
         </GroupBox>
         <GroupBox Header="Archive Patient Table"  Grid.Row="2" Margin="0,0,0,10" Foreground="White">
-            <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" Background="{x:Null}" BorderThickness="0" IsReadOnly="True" MouseDoubleClick="OpenDetailWindow">
+            <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" Background="{x:Null}" IsReadOnly="True" MouseDoubleClick="OpenDetailWindow" RowHeaderWidth="0" BorderBrush="{x:Null}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="2*" Header="Title" Binding="{Binding Title}"/>
                     <DataGridTextColumn Width="2*" Header="First name" Binding="{Binding FirstName}"/>
