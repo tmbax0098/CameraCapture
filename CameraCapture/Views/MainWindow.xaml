@@ -46,9 +46,9 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0" >
-                                <WindowsFormsHost Foreground="{x:Null}" Background="#FF1D1D1D" >
-                                    <local:PictureBox x:Name="RealPlayWnd" SizeMode="Zoom" />
+                            <Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                <WindowsFormsHost Foreground="{x:Null}" Background="#FF1D1D1D" Margin="0" VerticalAlignment="Center" MinHeight="150" >
+                                    <local:PictureBox x:Name="RealPlayWnd" SizeMode="Zoom" BackgroundImageLayout="Zoom" />
                                 </WindowsFormsHost>
                             </Grid>
                             <Grid Grid.Column="1" >

@@ -412,6 +412,8 @@ namespace CameraCapture
                 iLastErr = CHCNetSDK.NET_DVR_GetLastError();
                 str = "NET_DVR_CaptureJPEGPicture failed, error code= " + iLastErr;
                 //DebugInfo(str);
+                MessageControl messageControl = new MessageControl("Capture error", str);
+                messageControl.ShowDialog();
                 return;
             }
             else
@@ -421,7 +423,7 @@ namespace CameraCapture
             }
 
             //JEPG抓图，数据保存在缓冲区中 Capture a JPEG picture and save in the buffer
-            uint iBuffSize = 400000; //缓冲区大小需要不小于一张图片数据的大小 The buffer size should not be less than the picture size
+            uint iBuffSize = 9000000; //缓冲区大小需要不小于一张图片数据的大小 The buffer size should not be less than the picture size
             byte[] byJpegPicBuffer = new byte[iBuffSize];
             uint dwSizeReturned = 0;
 
@@ -430,6 +432,8 @@ namespace CameraCapture
                 iLastErr = CHCNetSDK.NET_DVR_GetLastError();
                 str = "NET_DVR_CaptureJPEGPicture_NEW failed, error code= " + iLastErr;
                 //DebugInfo(str);
+                MessageControl messageControl = new MessageControl("Capture error", str);
+                messageControl.ShowDialog();
                 return;
             }
             else

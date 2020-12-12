@@ -2,6 +2,7 @@
 FC:\Users\rad\source\repos\CameraCapture\CameraCapture\App.xaml;;
 FC:\Users\rad\source\repos\CameraCapture\CameraCapture\Views\ArchiveControl.xaml;;
 FC:\Users\rad\source\repos\CameraCapture\CameraCapture\Views\ArchiveDetailWindow.xaml;;
+FC:\Users\rad\source\repos\CameraCapture\CameraCapture\Views\CaptureSetting.xaml;;
 FC:\Users\rad\source\repos\CameraCapture\CameraCapture\Views\CloseWindow.xaml;;
 FC:\Users\rad\source\repos\CameraCapture\CameraCapture\Views\DvrSettingControl.xaml;;
 FC:\Users\rad\source\repos\CameraCapture\CameraCapture\Views\GalleryControl.xaml;;
@@ -16,5 +17,4 @@ FC:\Users\rad\source\repos\CameraCapture\CameraCapture\Views\SerialPortControl.x
 FC:\Users\rad\source\repos\CameraCapture\CameraCapture\Views\SettingWindow.xaml;;
 FC:\Users\rad\source\repos\CameraCapture\CameraCapture\Views\SigninWindow.xaml;;
 FC:\Users\rad\source\repos\CameraCapture\CameraCapture\Views\SplashWindow.xaml;;
-FC:\Users\rad\source\repos\CameraCapture\CameraCapture\Views\CaptureSetting.xaml;;
 
