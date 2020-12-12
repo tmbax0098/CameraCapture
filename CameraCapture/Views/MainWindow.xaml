@@ -25,7 +25,7 @@
                         </Grid>
                         </GroupBox>
                         <GroupBox Header="Today Patient List" Grid.Column="1">
-                            <DataGrid x:Name="dgTodayWorkBench"  AutoGenerateColumns="False" Background="{x:Null}" MouseDoubleClick="DgTodayWorkBench_MouseDoubleClick" IsReadOnly="True" RowHeaderWidth="3">
+                            <DataGrid x:Name="dgTodayWorkBench"  AutoGenerateColumns="False" Background="{x:Null}" MouseDoubleClick="DgTodayWorkBench_MouseDoubleClick" IsReadOnly="True" RowHeaderWidth="0">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Width="2*" Header="Title" Binding="{Binding Title}"/>
                                     <DataGridTextColumn Width="2*" Header="Name" Binding="{Binding Name}"/>
@@ -48,11 +48,11 @@
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0" >
                                 <WindowsFormsHost Foreground="{x:Null}" Background="#FF1D1D1D" >
-                                    <local:PictureBox x:Name="RealPlayWnd" />
+                                    <local:PictureBox x:Name="RealPlayWnd" SizeMode="Zoom" />
                                 </WindowsFormsHost>
                             </Grid>
                             <Grid Grid.Column="1" >
-                                <Image x:Name="picCapture" Stretch="Fill" />
+                                <Image x:Name="picCapture" />
                             </Grid>
                         </Grid>
                       

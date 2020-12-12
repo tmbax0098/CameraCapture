@@ -77,6 +77,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controllers\CaptureController.cs" />
     <Compile Include="Controllers\CHCNetSDK.cs" />
     <Compile Include="Controllers\DvrController.cs" />
     <Compile Include="Controllers\GalleryController.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Controllers\PlayCtrl.cs" />
     <Compile Include="Controllers\SerialPortController.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\CaptureSettingModel.cs" />
     <Compile Include="Models\ChannelObject.cs" />
     <Compile Include="Models\DvrObject.cs" />
     <Compile Include="Models\Entity\Models\Device.cs" />
@@ -98,6 +100,9 @@
     </Compile>
     <Compile Include="Views\ArchiveDetailWindow.xaml.cs">
       <DependentUpon>ArchiveDetailWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CaptureSetting.xaml.cs">
+      <DependentUpon>CaptureSetting.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CloseWindow.xaml.cs">
       <DependentUpon>CloseWindow.xaml</DependentUpon>
@@ -140,6 +145,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ArchiveDetailWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CaptureSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

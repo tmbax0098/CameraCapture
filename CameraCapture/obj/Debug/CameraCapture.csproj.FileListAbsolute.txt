@@ -52,3 +52,5 @@ C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\Views\SigninWind
 C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\Views\MessageControl.g.cs
 C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\Views\MessageControl.baml
 C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\CameraCapture.csprojAssemblyReference.cache
+C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\Views\CaptureSetting.g.cs
+C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\Views\CaptureSetting.baml

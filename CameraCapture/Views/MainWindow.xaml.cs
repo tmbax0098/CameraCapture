@@ -24,6 +24,7 @@ using System.Configuration;
 using System.Data.SqlServerCe;
 using CameraCapture.Entites;
 using CameraCapture.Models.Entites.Models;
+using System.Net.NetworkInformation;
 
 namespace CameraCapture
 {
@@ -35,6 +36,7 @@ namespace CameraCapture
         PatientDbContext patientDbContext = null;
         SerialPortController serialPortController = null;
         DvrController dvrControl = null;
+        CaptureController captureController = null;
         PedalController pedalController = null;
         private GalleryController galleryController = null;
         private int PatientId = -1;
@@ -85,6 +87,7 @@ namespace CameraCapture
         public delegate void MyDebugInfo(string str);
 
         #endregion sdk
+
 
 
         public MainWindow()
@@ -164,6 +167,7 @@ namespace CameraCapture
             dvrControl = new DvrController();
             galleryController = new GalleryController();
             pedalController = new PedalController();
+            captureController = new CaptureController();
 
             ChannelModelList = new List<ChannelObject>();
             cameraList = new List<int>();
@@ -180,6 +184,7 @@ namespace CameraCapture
                 galleryController.CreateAndOpenGalley(Id);
                 galleryControl.setGalleryId(Id);
                 patientWorkBenchName.Text = fullName;
+                picCapture.Source = null;
 
 
                 partBottom.Visibility = Visibility.Collapsed;
@@ -198,6 +203,32 @@ namespace CameraCapture
         }
 
 
+        private void startPingSamera()
+        {
+            while (true)
+            {
+                try
+                {
+                    Ping ping = new Ping();
+                    PingReply pingresult = ping.Send(dvrControl.dvrObject.Address);
+                    if (pingresult.Status == IPStatus.Success)
+                    {
+                        SuccessCamera();
+                    }
+                    else
+                    {
+                        FailCamera();
+                    }
+                    Thread.Sleep(2000);
+                }
+                catch
+                {
+                    FailCamera();
+                    Thread.Sleep(2000);
+                }
+            }
+        }
+
         #region camera functions -------------------------------
 
         private void LoginUser()
@@ -205,16 +236,12 @@ namespace CameraCapture
 
             if (m_lUserID < 0)
             {
-                string DVRIPAddress = dvrControl.dvrObject.Address; //设备IP地址或者域名 Device IP
-                Int16 DVRPortNumber = Int16.Parse(dvrControl.dvrObject.Port);//设备服务端口号 Device Port
-                string DVRUserName = dvrControl.dvrObject.Username;//设备登录用户名 User name to login
-                string DVRPassword = dvrControl.dvrObject.Password;//设备登录密码 Password to login
+                string DVRIPAddress = dvrControl.dvrObject.Address; // Device IP
+                Int16 DVRPortNumber = Int16.Parse(dvrControl.dvrObject.Port);// Device Port
+                string DVRUserName = dvrControl.dvrObject.Username;// User name to login
+                string DVRPassword = dvrControl.dvrObject.Password;// Password to login
 
-
-
-                //DeviceInfo = new CHCNetSDK.NET_DVR_DEVICEINFO_V30();
-
-                //µÇÂ¼Éè±¸ Login the device
+                // Login the device
                 m_lUserID = CHCNetSDK.NET_DVR_Login_V30(DVRIPAddress, DVRPortNumber, DVRUserName, DVRPassword, ref DeviceInfo);
                 if (m_lUserID < 0)
                 {
@@ -222,27 +249,13 @@ namespace CameraCapture
                     iLastErr = CHCNetSDK.NET_DVR_GetLastError();
                     str = "NET_DVR_Login_V30 failed, error code= " + iLastErr; //µÇÂ¼Ê§°Ü£¬Êä³ö´íÎóºÅ
 
-                    this.Dispatcher.Invoke(() =>
-                    {
-                        imageCameraStatus.Source = new BitmapImage(new Uri("/Resource/CameraFail.png", UriKind.Relative));
-
-                    });
-
                     return;
                 }
                 else
                 {
-                    this.Dispatcher.Invoke(() =>
-                    {
-                        imageCameraStatus.Source = new BitmapImage(new Uri("/Resource/CameraSuccess.png", UriKind.Relative));
-
-                    });
                     //login success
-                    // Thread.Sleep(2000);
                     //start live preview
                     // LivePreView();
-
-                    //Console.WriteLine("----------------------------------- login shod i----------------------------------------------------------");
 
                 }
 
@@ -291,16 +304,18 @@ namespace CameraCapture
 
         private void LivePreView()
         {
+            // LoginUser();
+
             if (m_lUserID < 0)
             {
-                FailCamera();
-                //MessageBox.Show("Please login the device firstly");
+                LoginUser();
                 return;
             }
 
             if (m_lRealHandle < 0)
             {
                 CHCNetSDK.NET_DVR_PREVIEWINFO lpPreviewInfo = new CHCNetSDK.NET_DVR_PREVIEWINFO();
+                //lpPreviewInfo.byPreviewMode = CHCNetSDK.NET_DVR_PREVIEWINFO
 
                 RealPlayWnd.Invoke(new ForTest(() =>
                 {
@@ -329,10 +344,14 @@ namespace CameraCapture
                 {
                     iLastErr = CHCNetSDK.NET_DVR_GetLastError();
                     str = "NET_DVR_RealPlay_V40 failed, error code= " + iLastErr; //Ô¤ÀÀÊ§°Ü£¬Êä³ö´íÎóºÅ
-                    FailCamera();
+                                                                                  // FailCamera();
+
+                    MessageControl messageControl = new MessageControl("Fail", str);
+                    messageControl.ShowDialog();
+
                     return;
                 }
-                SuccessCamera();
+                //SuccessCamera();
             }
             return;
         }
@@ -351,7 +370,8 @@ namespace CameraCapture
                 return;
             }
             m_lRealHandle = -1;
-            FailCamera();
+            //LogoutUser();
+            //FailCamera();
 
 
         }
@@ -379,8 +399,8 @@ namespace CameraCapture
 
             int lChannel = Int32.Parse(dvrControl.dvrObject.Channel);
             CHCNetSDK.NET_DVR_JPEGPARA lpJpegPara = new CHCNetSDK.NET_DVR_JPEGPARA();
-            lpJpegPara.wPicQuality = 0; //图像质量 Image quality
-            lpJpegPara.wPicSize = 0xff; //抓图分辨率 Picture size: 0xff-Auto(使用当前码流分辨率) 
+            lpJpegPara.wPicQuality = captureController.captureSettingModel.PictureQuality; //图像质量 Image quality-----------------------------------------from 0 to 5 changed--------------------------------------
+            lpJpegPara.wPicSize = captureController.captureSettingModel.PictureSize; //抓图分辨率 Picture size: 0xff-Auto(使用当前码流分辨率) 
             //抓图分辨率需要设备支持，更多取值请参考SDK文档
 
             //JPEG抓图保存成文件 Capture a JPEG picture
@@ -484,6 +504,8 @@ namespace CameraCapture
             LoginUser();
 
             LoadTodayPatientTable();
+
+            new Task(new Action(startPingSamera)).Start();
 
             //List<PatientViewModel> list = new List<PatientViewModel>();
             //list.Add(new PatientViewModel {

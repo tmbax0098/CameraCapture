@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="CameraCapture.Views.CaptureSetting"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CameraCapture.Views"
+             mc:Ignorable="d" 
+             d:DesignWidth="300" MinHeight="150" MaxHeight="200" Loaded="onLoad">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Margin="0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Picture Size" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White"/>
+            <ComboBox x:Name="cbSize" Grid.Column="1" >
+                <ComboBoxItem Content="CIF"/>
+                <ComboBoxItem Content="QCIF"/>
+                <ComboBoxItem Content="D1"/>
+                <ComboBoxItem Content="UXGA"/>
+                <ComboBoxItem Content="SVGA"/>
+                <ComboBoxItem Content="HD720p"/>
+                <ComboBoxItem Content="VGA"/>
+            </ComboBox>
+        </Grid>
+        <Grid Grid.Row="1" Margin="0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Picture Quality" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White"/>
+            <ComboBox x:Name="cbQuality" Grid.Column="1" >
+                <ComboBoxItem Content="MODE 1"/>
+                <ComboBoxItem Content="MODE 2"/>
+                <ComboBoxItem Content="MODE 3"/>
+            </ComboBox>
+        </Grid>
+        <Button Content="Save" Grid.Row="2" Template="{DynamicResource Button_Rounded}" Margin="5" Click="Save"/>
+    </Grid>
+</UserControl>
