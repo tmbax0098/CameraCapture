@@ -57,4 +57,3 @@ C:\Users\rad\source\repos\CameraCapture\CameraCapture\bin\Debug\ImageProcessor.d
 C:\Users\rad\source\repos\CameraCapture\CameraCapture\bin\Debug\System.ValueTuple.dll
 C:\Users\rad\source\repos\CameraCapture\CameraCapture\bin\Debug\ImageProcessor.xml
 C:\Users\rad\source\repos\CameraCapture\CameraCapture\bin\Debug\System.ValueTuple.xml
-C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\CameraCapture.csprojAssemblyReference.cache

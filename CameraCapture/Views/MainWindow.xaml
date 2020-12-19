@@ -47,11 +47,11 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0" x:Name="gridLive">
-                                <WindowsFormsHost Name="windowsFormsHost1" Background="#FFAE1D1D" Foreground="{x:Null}" >
+                                <WindowsFormsHost Name="windowsFormsHost1" Foreground="{x:Null}" Background="{x:Null}" >
                                     <local:PictureBox x:Name="ovalPictureBox"/>
                                 </WindowsFormsHost>
                             </Grid>
-                            <Grid Grid.Column="1" Background="#FF680C0C" >
+                            <Grid Grid.Column="1" >
                                 <Image x:Name="picCapture" />
                             </Grid>
                         </Grid>
