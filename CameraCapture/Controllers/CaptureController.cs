@@ -34,15 +34,17 @@ namespace CameraCapture.Controllers
 
                 if (parts.Length == 2)
                 {
-                    if (parts[0] == "0" || parts[0] == "1" || parts[0] == "2" || parts[0] == "3" || parts[0] == "4" || parts[0] == "5" || parts[0] == "6")
+                    try
                     {
                         if (parts[1] == "0" || parts[1] == "1" || parts[1] == "2")
                         {
-                            captureSettingModel.PictureSize = ushort.Parse(parts[0]);
                             captureSettingModel.PictureQuality = ushort.Parse(parts[1]);
+                            captureSettingModel.PictureSize = ushort.Parse(parts[0]);
+
                             return;
                         }
                     }
+                    catch { }
                 }
             }
 

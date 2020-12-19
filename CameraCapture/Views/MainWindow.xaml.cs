@@ -25,6 +25,7 @@ using System.Data.SqlServerCe;
 using CameraCapture.Entites;
 using CameraCapture.Models.Entites.Models;
 using System.Net.NetworkInformation;
+using System.Drawing;
 
 namespace CameraCapture
 {
@@ -38,15 +39,12 @@ namespace CameraCapture
         DvrController dvrControl = null;
         CaptureController captureController = null;
         PedalController pedalController = null;
+        OtherController otherController = null;
         private GalleryController galleryController = null;
         private int PatientId = -1;
 
-
+        //OvalPictureBox ovalPictureBox;
         public delegate void ForTest();
-
-        List<int> cameraList = null;
-        private List<ChannelObject> ChannelModelList = null;
-        private int selectedPatientId = -1;
 
         #region sdk
 
@@ -90,6 +88,8 @@ namespace CameraCapture
 
 
 
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -113,6 +113,10 @@ namespace CameraCapture
 
         public void InitialVariables()
         {
+
+            otherController = new OtherController();
+
+            ovalPictureBox.BackgroundImageLayout = ImageLayout.Zoom;
 
             serialPortController = new SerialPortController(true);
             serialPortController.PortOpen += () =>
@@ -169,9 +173,6 @@ namespace CameraCapture
             pedalController = new PedalController();
             captureController = new CaptureController();
 
-            ChannelModelList = new List<ChannelObject>();
-            cameraList = new List<int>();
-
             patientDbContext = new PatientDbContext();
 
             dgTodayWorkBench.DataContext = patientDbContext.Patients.ToList();
@@ -184,7 +185,7 @@ namespace CameraCapture
                 galleryController.CreateAndOpenGalley(Id);
                 galleryControl.setGalleryId(Id);
                 patientWorkBenchName.Text = fullName;
-                picCapture.Source = null;
+                //picCapture.Source = null;
 
 
                 partBottom.Visibility = Visibility.Collapsed;
@@ -195,9 +196,19 @@ namespace CameraCapture
             {
                 this.Dispatcher.Invoke(() =>
                 {
-                    //BitmapImage btm = new BitmapImage(new Uri(path));
-                    //ImageSource imageSource = new ImageSource()
+
+                    //ellipseGeometry.Center = new Point(bitmapImage.Width / 2, bitmapImage.Height / 2);
+
+                    //int startX = (int)(bitmapImage.Width - bitmapImage.Height) / 2;
+
+                    //int endX = (int)(bitmapImage.Width + startX);
+
+                    ////CroppedBitmap croppedBitmap = new CroppedBitmap(bitmapImage, new Int32Rect(startX, 0, endX, (int)bitmapImage.Height));
+
+                    //croppedBitmap.SourceRect = new Int32Rect(startX, 0, endX, (int)bitmapImage.Height);
+
                     picCapture.Source = bitmapImage;
+
                 });
             };
         }
@@ -314,19 +325,24 @@ namespace CameraCapture
 
             if (m_lRealHandle < 0)
             {
-                CHCNetSDK.NET_DVR_PREVIEWINFO lpPreviewInfo = new CHCNetSDK.NET_DVR_PREVIEWINFO();
-                //lpPreviewInfo.byPreviewMode = CHCNetSDK.NET_DVR_PREVIEWINFO
 
-                RealPlayWnd.Invoke(new ForTest(() =>
+
+
+                CHCNetSDK.NET_DVR_PREVIEWINFO lpPreviewInfo = new CHCNetSDK.NET_DVR_PREVIEWINFO();
+
+                ovalPictureBox.Invoke(new ForTest(() =>
                 {
-                    lpPreviewInfo.hPlayWnd = RealPlayWnd.Handle;//Ô¤ÀÀ´°¿Ú
+                    ovalPictureBox.BackgroundImageLayout = ImageLayout.Zoom;
+                    ovalPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+                    lpPreviewInfo.hPlayWnd = ovalPictureBox.Handle;
                 }));
 
-                lpPreviewInfo.lChannel = Int16.Parse(dvrControl.dvrObject.Channel);//channel value ===> [1,2,3,4,5,6]
-                lpPreviewInfo.dwStreamType = 0;//ÂëÁ÷ÀàÐÍ£º0-Ö÷ÂëÁ÷£¬1-×ÓÂëÁ÷£¬2-ÂëÁ÷3£¬3-ÂëÁ÷4£¬ÒÔ´ËÀàÍÆ
-                lpPreviewInfo.dwLinkMode = 0;//Á¬½Ó·½Ê½£º0- TCP·½Ê½£¬1- UDP·½Ê½£¬2- ¶à²¥·½Ê½£¬3- RTP·½Ê½£¬4-RTP/RTSP£¬5-RSTP/HTTP 
-                lpPreviewInfo.bBlocked = true; //0- ·Ç×èÈûÈ¡Á÷£¬1- ×èÈûÈ¡Á÷
-                lpPreviewInfo.dwDisplayBufNum = 1; //²¥·Å¿â²¥·Å»º³åÇø×î´ó»º³åÖ¡Êý
+
+                lpPreviewInfo.lChannel = Int16.Parse(dvrControl.dvrObject.Channel);
+                lpPreviewInfo.dwStreamType = 0;
+                lpPreviewInfo.dwLinkMode = 0;
+                lpPreviewInfo.bBlocked = true;
+                lpPreviewInfo.dwDisplayBufNum = 1;
                 lpPreviewInfo.byProtoType = 0;
                 lpPreviewInfo.byPreviewMode = 0;
 
@@ -395,17 +411,17 @@ namespace CameraCapture
 
         private void CaptureJpeg(bool MoveImageToRight = true)
         {
-            // int lChannel = iChannelNum[(int)iSelIndex]; //通道号 Channel number
 
             int lChannel = Int32.Parse(dvrControl.dvrObject.Channel);
             CHCNetSDK.NET_DVR_JPEGPARA lpJpegPara = new CHCNetSDK.NET_DVR_JPEGPARA();
-            lpJpegPara.wPicQuality = captureController.captureSettingModel.PictureQuality; //图像质量 Image quality-----------------------------------------from 0 to 5 changed--------------------------------------
-            lpJpegPara.wPicSize = captureController.captureSettingModel.PictureSize; //抓图分辨率 Picture size: 0xff-Auto(使用当前码流分辨率) 
-            //抓图分辨率需要设备支持，更多取值请参考SDK文档
 
-            //JPEG抓图保存成文件 Capture a JPEG picture
+
+            lpJpegPara.wPicQuality = captureController.captureSettingModel.PictureQuality;
+            lpJpegPara.wPicSize = captureController.captureSettingModel.PictureSize;
+
+            //Capture a JPEG picture
             string sJpegPicFileName;
-            sJpegPicFileName = "reza.jpeg";//图片保存路径和文件名 the path and file name to save
+            sJpegPicFileName = "reza.jpeg";
 
             if (!CHCNetSDK.NET_DVR_CaptureJPEGPicture(m_lUserID, lChannel, ref lpJpegPara, sJpegPicFileName))
             {
@@ -422,8 +438,7 @@ namespace CameraCapture
                 //DebugInfo(str);
             }
 
-            //JEPG抓图，数据保存在缓冲区中 Capture a JPEG picture and save in the buffer
-            uint iBuffSize = 9000000; //缓冲区大小需要不小于一张图片数据的大小 The buffer size should not be less than the picture size
+            uint iBuffSize = 9000000;
             byte[] byJpegPicBuffer = new byte[iBuffSize];
             uint dwSizeReturned = 0;
 
@@ -438,6 +453,7 @@ namespace CameraCapture
             }
             else
             {
+
 
                 if (MoveImageToRight)
                 {
@@ -511,24 +527,8 @@ namespace CameraCapture
 
             new Task(new Action(startPingSamera)).Start();
 
-            //List<PatientViewModel> list = new List<PatientViewModel>();
-            //list.Add(new PatientViewModel {
-            //    Id = 0,
-            //    Firstname = "asd",
-            //    Lastname="3453fdsfada",
-            //    PatientId="23446345",
-            //    Title = "sdfgg"
-            //});
-            //list.Add(new PatientViewModel
-            //{
-            //    Id = 2,
-            //    Firstname = "asd",
-            //    Lastname = "3453fdsfada",
-            //    PatientId = "23446345",
-            //    Title = "sdfgg"
-            //});
+            windowsFormsHost1.Child = ovalPictureBox;
 
-            //dgTodayWorkBench.ItemsSource = list;
         }
 
         private void CloseApplication(object sender, MouseButtonEventArgs e)
@@ -608,5 +608,37 @@ namespace CameraCapture
             }
         }
 
+        private void onChangeSelectedTab(object sender, SelectionChangedEventArgs e)
+        {
+            if (mainTabControl.SelectedIndex == 1)
+            {
+                var width = (this.Width - 10) / 2;
+                var height = (this.Height - 210);
+
+
+                windowsFormsHost1.Height = width * otherController.Ratio;
+              //  picCapture.Height = width * otherController.Ratio;
+
+
+                //if (width < height)
+                //{
+                //    windowsFormsHost1.Height = width;
+
+                //    //picCapture.Height = width;
+                //    //ellipseGeometry.Center = new System.Windows.Point(width / 2, width / 2);
+                //    //ellipseGeometry.RadiusX = width / 2;
+                //    //ellipseGeometry.RadiusY = width / 2;
+                //}
+                //else
+                //{
+                //    windowsFormsHost1.Width = height;
+                //    //picCapture.Width = height;
+                //    //ellipseGeometry.Center = new System.Windows.Point(height / 2, height / 2);
+                //    //ellipseGeometry.RadiusX = height / 2;
+                //    //ellipseGeometry.RadiusY = height / 2;
+                //}
+
+            }
+        }
     }
 }

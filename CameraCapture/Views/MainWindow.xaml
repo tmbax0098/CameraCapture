@@ -12,7 +12,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <TabControl x:Name="mainTabControl" Margin="0" Background="{x:Null}" SelectedIndex="0" >
+            <TabControl x:Name="mainTabControl" Margin="0" Background="{x:Null}" SelectedIndex="0" SelectionChanged="onChangeSelectedTab" >
                 <TabItem x:Name="tabItemPatient" Header="Patient" Visibility="Collapsed" >
                     <Grid Margin="5">
                         <Grid.ColumnDefinitions>
@@ -20,9 +20,9 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <GroupBox Header="Patient Information" Margin="0,0,5,0">
-                        <Grid VerticalAlignment="Top" Margin="0,10,0,0" >
-                            <Views:PatientContro x:Name="pateintTodayForm" />
-                        </Grid>
+                            <Grid VerticalAlignment="Top" Margin="0,10,0,0" >
+                                <Views:PatientControl x:Name="pateintTodayForm" />
+                            </Grid>
                         </GroupBox>
                         <GroupBox Header="Today Patient List" Grid.Column="1">
                             <DataGrid x:Name="dgTodayWorkBench"  AutoGenerateColumns="False" Background="{x:Null}" MouseDoubleClick="DgTodayWorkBench_MouseDoubleClick" IsReadOnly="True" RowHeaderWidth="0">
@@ -35,10 +35,10 @@
                         </GroupBox>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Workbench" Visibility="Collapsed">
+                <TabItem x:Name="tabItemWorkbench" Header="Workbench" Visibility="Collapsed" >
                     <Grid Margin="5" >
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
+                            <RowDefinition Height="*"/>
                             <RowDefinition Height="200"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
@@ -46,18 +46,16 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                                <WindowsFormsHost Foreground="{x:Null}" Background="#FF1D1D1D" Margin="0" VerticalAlignment="Center" MinHeight="150" >
-                                    <local:PictureBox x:Name="RealPlayWnd" SizeMode="Zoom" BackgroundImageLayout="Zoom" />
+                            <Grid Grid.Column="0" x:Name="gridLive">
+                                <WindowsFormsHost Name="windowsFormsHost1" Background="#FFAE1D1D" Foreground="{x:Null}" >
+                                    <local:PictureBox x:Name="ovalPictureBox"/>
                                 </WindowsFormsHost>
                             </Grid>
-                            <Grid Grid.Column="1" >
+                            <Grid Grid.Column="1" Background="#FF680C0C" >
                                 <Image x:Name="picCapture" />
                             </Grid>
                         </Grid>
-                      
-
-                        <GroupBox Header="Patient Gallery"  Grid.Row="2">
+                        <GroupBox x:Name="pateintGallery" Header="Patient Gallery"  Grid.Row="2">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="40" />
@@ -76,11 +74,10 @@
 
                                 </Grid>
                                 <Border Grid.Row="1" BorderThickness="0,2,0,0" Margin="0,5,0,0" Padding="0,5,0,0" BorderBrush="White">
-                                <Views:GalleryControl x:Name="galleryControl"/>
+                                    <Views:GalleryControl x:Name="galleryControl"/>
                                 </Border>
                             </Grid>
                         </GroupBox>
-                        
                     </Grid>
                 </TabItem>
                 <TabItem x:Name="tabItemArchive" Visibility="Collapsed">
@@ -103,12 +100,12 @@
                 </Grid.ColumnDefinitions>
                 <Image Grid.Column="0" Source="/CameraCapture;component/Resource/Setting.png" MouseDown="OpenSetting"  />
                 <Button x:Name="btnArchive"  Grid.Column="1" Content="Archive" Margin="10,2,2,2" Template="{DynamicResource Button_Rounded}" Click="GoToArchiveTab" />
-               
+
 
                 <Image x:Name="imageCameraStatus" Grid.Column="3" Source="/CameraCapture;component/Resource/CameraFail.png" />
                 <Image x:Name="imageSerialportStatus" Grid.Column="4" Source="/CameraCapture;component/Resource/SerialPortFail.png" />
-                
-                
+
+
                 <Image Grid.Column="6" Source="/CameraCapture;component/Resource/exit.png" MouseDown="CloseApplication" />
             </Grid>
         </Border>

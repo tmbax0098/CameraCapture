@@ -20,13 +20,13 @@ using System.Windows.Shapes;
 namespace CameraCapture.Views
 {
     /// <summary>
-    /// Interaction logic for PatientContro.xaml
+    /// Interaction logic for PatientControl.xaml
     /// </summary>
-    public partial class PatientContro : UserControl
+    public partial class PatientControl : UserControl
     {
 
         PatientDbContext patientDbContext = null;
-        public PatientContro()
+        public PatientControl()
         {
             InitializeComponent();
             patientDbContext = new PatientDbContext();

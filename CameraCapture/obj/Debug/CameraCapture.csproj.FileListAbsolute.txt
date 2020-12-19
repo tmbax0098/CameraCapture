@@ -51,6 +51,10 @@ C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\Views\SigninWind
 C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\Views\SigninWindow.baml
 C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\Views\MessageControl.g.cs
 C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\Views\MessageControl.baml
-C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\CameraCapture.csprojAssemblyReference.cache
 C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\Views\CaptureSetting.g.cs
 C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\Views\CaptureSetting.baml
+C:\Users\rad\source\repos\CameraCapture\CameraCapture\bin\Debug\ImageProcessor.dll
+C:\Users\rad\source\repos\CameraCapture\CameraCapture\bin\Debug\System.ValueTuple.dll
+C:\Users\rad\source\repos\CameraCapture\CameraCapture\bin\Debug\ImageProcessor.xml
+C:\Users\rad\source\repos\CameraCapture\CameraCapture\bin\Debug\System.ValueTuple.xml
+C:\Users\rad\source\repos\CameraCapture\CameraCapture\obj\Debug\CameraCapture.csprojAssemblyReference.cache
