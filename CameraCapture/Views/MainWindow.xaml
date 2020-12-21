@@ -52,7 +52,7 @@
                                 </WindowsFormsHost>
                             </Grid>
                             <Grid Grid.Column="1" >
-                                <Image x:Name="picCapture" />
+                                <Image x:Name="picCapture" Stretch="Fill" />
                             </Grid>
                         </Grid>
                         <GroupBox x:Name="pateintGallery" Header="Patient Gallery"  Grid.Row="2">

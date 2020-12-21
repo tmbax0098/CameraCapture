@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CameraCapture.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,7 @@ namespace CameraCapture.Views
     /// </summary>
     public partial class ArchiveDetailWindow : Window
     {
+        OtherController otherController = null;
         public BitmapImage SelectedImage { get; private set; }
         public int SelectedPatientId { get; private set; }
         public ArchiveDetailWindow()
@@ -30,11 +32,11 @@ namespace CameraCapture.Views
             {
                 SelectedImage = bitmapImage;
             };
+            otherController = new OtherController();
         }
 
         public void SetPatientId(int Id)
         {
-
             SelectedPatientId = Id;
             gallery.setGalleryId(Id);
             gallery.LoadGalleryImageList();
@@ -61,6 +63,17 @@ namespace CameraCapture.Views
         private void CloseThisWindow(object sender, MouseButtonEventArgs e)
         {
             this.Close();
+        }
+
+        private void OnLoadWindow(object sender, RoutedEventArgs e)
+        {
+            double width = (this.Width - 6) / 2;
+
+            //imageLeft.Height = width; //otherController.Ratio * width;
+            //imageRight.Height = width;// otherController.Ratio * width;
+
+            imageLeft.Height = otherController.Ratio * width;
+            imageRight.Height = otherController.Ratio * width;
         }
     }
 }

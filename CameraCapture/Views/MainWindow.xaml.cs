@@ -617,7 +617,7 @@ namespace CameraCapture
 
 
                 windowsFormsHost1.Height = width * otherController.Ratio;
-              //  picCapture.Height = width * otherController.Ratio;
+                picCapture.Height = width * otherController.Ratio;
 
 
                 //if (width < height)
