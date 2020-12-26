@@ -370,6 +370,10 @@ namespace CameraCapture
 
                     return;
                 }
+                else
+                {
+                    SetImageRight();
+                }
                 //SuccessCamera();
             }
             return;
