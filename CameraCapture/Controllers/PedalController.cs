@@ -16,12 +16,13 @@ namespace CameraCapture.Controllers
 
         public bool SaveOnFreeze { get; set; }
         public bool SaveOnSave { get; set; }
+        public bool SetImageRightOnSave { get; set; }
 
 
 
         public PedalController()
         {
-            
+
             path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\" + PedalSettingFile;
 
             read();
@@ -33,23 +34,25 @@ namespace CameraCapture.Controllers
             {
                 string[] parts = File.ReadAllLines(path);
 
-                if (parts.Length == 2)
+                if (parts.Length == 3)
                 {
                     SaveOnFreeze = parts[0] == "1";
                     SaveOnSave = parts[1] == "1";
+                    SetImageRightOnSave = parts[2] == "1";
                     return;
                 }
             }
 
             SaveOnFreeze = false;
             SaveOnSave = true;
+            SetImageRightOnSave = false;
 
             Write();
         }
 
         public void Write()
         {
-            File.WriteAllLines(path, new string[] { SaveOnFreeze ? "1" : "0", SaveOnSave ? "1" : "0" });
+            File.WriteAllLines(path, new string[] { SaveOnFreeze ? "1" : "0", SaveOnSave ? "1" : "0", SetImageRightOnSave ? "1" : "0" });
         }
 
 

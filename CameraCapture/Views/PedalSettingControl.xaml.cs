@@ -33,6 +33,7 @@ namespace CameraCapture.Views
         {
             pedalController.SaveOnFreeze = cbSaveOnFreeze.IsChecked == true ? true : false;
             pedalController.SaveOnSave = cbSaveOnSave.IsChecked == true ? true : false;
+            pedalController.SetImageRightOnSave = cbSetRightOnSave.IsChecked == true ? true : false;
 
             pedalController.Write();
         }
@@ -42,6 +43,7 @@ namespace CameraCapture.Views
             pedalController = new PedalController();
             cbSaveOnFreeze.IsChecked = pedalController.SaveOnFreeze;
             cbSaveOnSave.IsChecked = pedalController.SaveOnSave;
+            cbSetRightOnSave.IsChecked = pedalController.SetImageRightOnSave;
         }
     }
 }

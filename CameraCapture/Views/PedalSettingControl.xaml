@@ -5,10 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CameraCapture.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="200" MinHeight="150" MaxHeight="200" Loaded="onLoad">
+             d:DesignHeight="150" d:DesignWidth="250" MinHeight="150" MaxHeight="200" Loaded="onLoad">
     <Grid>
         <Grid.RowDefinitions>
             <!--<RowDefinition/>-->
+            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -16,11 +17,12 @@
 
         <!--<Label Content="Controller Setting" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="14" />-->
 
-        <CheckBox x:Name="cbSaveOnFreeze" Content="Save on freeze live" Grid.Row="0" VerticalAlignment="Center" Foreground="White" />
+        <CheckBox x:Name="cbSaveOnFreeze" Content="Save image to gallery on FREEZE" Grid.Row="0" VerticalAlignment="Center" Foreground="White" />
 
-        <CheckBox x:Name="cbSaveOnSave" Content="Save on press capture" Grid.Row="1" VerticalAlignment="Center" Foreground="White" />
+        <CheckBox x:Name="cbSaveOnSave" Content="Save image to gallery on SAVE" Grid.Row="1" VerticalAlignment="Center" Foreground="White" />
+        <CheckBox x:Name="cbSetRightOnSave" Content="Set image to right window on SAVE" Grid.Row="2" VerticalAlignment="Center" Foreground="White" />
 
-        <Button Name="btnSave" Content="Save" Grid.Row="2" Margin="2" Template="{DynamicResource Button_Rounded}" Click="BtnSave_Click" />
+        <Button Name="btnSave" Content="Save" Grid.Row="3" Margin="2" Template="{DynamicResource Button_Rounded}" Click="BtnSave_Click" />
 
     </Grid>
 </UserControl>

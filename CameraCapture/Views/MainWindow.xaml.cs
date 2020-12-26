@@ -43,6 +43,10 @@ namespace CameraCapture
         private GalleryController galleryController = null;
         private int PatientId = -1;
 
+        private uint iBuffSize = 9000000;
+        private byte[] byJpegPicBuffer = null;
+        uint dwSizeReturned = 0;
+
         //OvalPictureBox ovalPictureBox;
         public delegate void ForTest();
 
@@ -85,9 +89,6 @@ namespace CameraCapture
         public delegate void MyDebugInfo(string str);
 
         #endregion sdk
-
-
-
 
 
         public MainWindow()
@@ -151,18 +152,20 @@ namespace CameraCapture
                     case "SAVE":
                         if (pedalController.SaveOnSave)
                         {
-                            CaptureJpeg();
+                            SaveToGallery();
+                        }
+                        if (pedalController.SetImageRightOnSave)
+                        {
+                            SetImageRight();
                         }
                         break;
                     case "FREEZE":
-
+                        CaptureJpeg();
+                        StopLivePreView();
                         if (pedalController.SaveOnFreeze)
                         {
-                            CaptureJpeg(false);
+                            SaveToGallery();
                         }
-
-                        StopLivePreView();
-
                         break;
 
                 }
@@ -409,7 +412,7 @@ namespace CameraCapture
 
 
 
-        private void CaptureJpeg(bool MoveImageToRight = true)
+        private void CaptureJpeg()
         {
 
             int lChannel = Int32.Parse(dvrControl.dvrObject.Channel);
@@ -438,9 +441,8 @@ namespace CameraCapture
                 //DebugInfo(str);
             }
 
-            uint iBuffSize = 9000000;
-            byte[] byJpegPicBuffer = new byte[iBuffSize];
-            uint dwSizeReturned = 0;
+            byJpegPicBuffer = new byte[iBuffSize];
+
 
             if (!CHCNetSDK.NET_DVR_CaptureJPEGPicture_NEW(m_lUserID, lChannel, ref lpJpegPara, byJpegPicBuffer, iBuffSize, ref dwSizeReturned))
             {
@@ -453,25 +455,25 @@ namespace CameraCapture
             }
             else
             {
-
-
-                if (MoveImageToRight)
-                {
-                    this.Dispatcher.Invoke(() =>
-                    {
-                        picCapture.Source = galleryController.ConvertToImage(byJpegPicBuffer);
-                    });
-                }
-                galleryController.CreateAndOpenGalley(PatientId);
-                galleryController.AppendImageToGallery(byJpegPicBuffer, dwSizeReturned);
-                galleryControl.LoadGalleryImageList();
-
-
                 str = "NET_DVR_CaptureJPEGPicture_NEW succ and save the data in buffer to 'buffertest.jpg'.";
-                //DebugInfo(str);
             }
 
             return;
+        }
+
+        private void SetImageRight()
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                picCapture.Source = galleryController.ConvertToImage(byJpegPicBuffer);
+            });
+        }
+
+        private void SaveToGallery()
+        {
+            galleryController.CreateAndOpenGalley(PatientId);
+            galleryController.AppendImageToGallery(byJpegPicBuffer, dwSizeReturned);
+            galleryControl.LoadGalleryImageList();
         }
 
         //private void CaptureJpeg()
@@ -549,8 +551,6 @@ namespace CameraCapture
 
         }
 
-
-
         #region today work
 
         private void LoadTodayPatientTable()
@@ -613,7 +613,7 @@ namespace CameraCapture
             if (mainTabControl.SelectedIndex == 1)
             {
                 var width = (this.Width - 10) / 2;
-                var height = (this.Height - 210);
+                //var height = (this.Height - 210);
 
 
                 windowsFormsHost1.Height = width * otherController.Ratio;
